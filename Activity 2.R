@@ -35,6 +35,11 @@ averageTemp
 #convert factor Level to number
 datW$siteN <- as.numeric(as.factor(datW$NAME))
 
+
+#print all histograms
+par(mfrow=c(2,2))
+
+
 #QUESTION 3
 #histogram for first site
 hist(datW$TAVE[datW$siteN == 1],
@@ -50,8 +55,86 @@ abline(v = mean(datW$TAVE[datW$siteN == 1], na.rm = TRUE),
        col = "tomato3",
        lwd = 3)
 
-#add a standard deviation line
+#add a standard deviation line below the mean
 abline(v = mean(datW$TAVE[datW$siteN == 1], na.rm=TRUE) - sd(datW$TAVE[datW$siteN == 1], na.rm=TRUE),
       col = "tomato3",
       lty = 3,
       lwd =3)
+
+#add a sd line above the mean
+abline(v = mean(datW$TAVE[datW$siteN == 1], na.rm=TRUE) + sd(datW$TAVE[datW$siteN == 1], na.rm=TRUE),
+       col = "tomato3",
+       lty = 3,
+       lwd = 3)
+
+#QUESTION 4
+
+#histogram for second site
+hist(datW$TAVE[datW$siteN == 2],
+     freq = FALSE,
+     main = paste(levels(datW$NAME)[2]),
+     xlab = "Average daily temperature (degrees C)",
+     ylab = "Relative frequency",
+     col = "grey50",
+     border = "white")
+#add a mean line
+abline(v = mean(datW$TAVE[datW$siteN == 2], na.rm = TRUE),
+       col = "deeppink",
+       lwd = 3)
+#add a standard deviation line below the mean
+abline(v = mean(datW$TAVE[datW$siteN == 2], na.rm=TRUE) - sd(datW$TAVE[datW$siteN == 2], na.rm=TRUE),
+       col = "deeppink",
+       lty = 3,
+       lwd =3)
+#add a sd line above the mean
+abline(v = mean(datW$TAVE[datW$siteN == 2], na.rm=TRUE) + sd(datW$TAVE[datW$siteN == 2], na.rm=TRUE),
+       col = "deeppink",
+       lty = 3,
+       lwd = 3)
+
+#histogram for 3rd site
+hist(datW$TAVE[datW$siteN == 3],
+     freq = FALSE,
+     main = paste(levels(datW$NAME)[3]),
+     xlab = "Average daily temperature (degrees C)",
+     ylab = "Relative frequency",
+     col = "grey50",
+     border = "white")
+#add a mean line
+abline(v = mean(datW$TAVE[datW$siteN == 3], na.rm = TRUE),
+       col = "mediumspringgreen",
+       lwd = 3)
+#add a standard deviation line below the mean
+abline(v = mean(datW$TAVE[datW$siteN == 3], na.rm=TRUE) - sd(datW$TAVE[datW$siteN == 3], na.rm=TRUE),
+       col = "mediumspringgreen",
+       lty = 3,
+       lwd =3)
+#add a sd line above the mean
+abline(v = mean(datW$TAVE[datW$siteN == 3], na.rm=TRUE) + sd(datW$TAVE[datW$siteN == 3], na.rm=TRUE),
+       col = "mediumspringgreen",
+       lty = 3,
+       lwd = 3)
+
+#histogram for 4th site
+hist(datW$TAVE[datW$siteN == 4],
+     freq = FALSE,
+     main = paste(levels(datW$NAME)[4]),
+     xlab = "Average daily temperature (degrees C)",
+     ylab = "Relative frequency",
+     col = "grey50",
+     border = "white")
+#add a mean line
+abline(v = mean(datW$TAVE[datW$siteN == 4], na.rm = TRUE),
+       col = "royalblue4",
+       lwd = 3)
+#add a standard deviation line below the mean
+abline(v = mean(datW$TAVE[datW$siteN == 4], na.rm=TRUE) - sd(datW$TAVE[datW$siteN == 4], na.rm=TRUE),
+       col = "royalblue4",
+       lty = 3,
+       lwd =3)
+#add a sd line above the mean
+abline(v = mean(datW$TAVE[datW$siteN == 4], na.rm=TRUE) + sd(datW$TAVE[datW$siteN == 4], na.rm=TRUE),
+       col = "royalblue4",
+       lty = 3,
+       lwd = 3)
+
