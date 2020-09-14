@@ -75,7 +75,7 @@ hist(datW$TAVE[datW$siteN == 2],
      main = paste(levels(datW$NAME)[2]),
      xlab = "Average daily temperature (degrees C)",
      ylab = "Relative frequency",
-     col = "grey50",
+     col = "slategray1",
      border = "white")
 #add a mean line
 abline(v = mean(datW$TAVE[datW$siteN == 2], na.rm = TRUE),
@@ -98,7 +98,7 @@ hist(datW$TAVE[datW$siteN == 3],
      main = paste(levels(datW$NAME)[3]),
      xlab = "Average daily temperature (degrees C)",
      ylab = "Relative frequency",
-     col = "grey50",
+     col = "tan1",
      border = "white")
 #add a mean line
 abline(v = mean(datW$TAVE[datW$siteN == 3], na.rm = TRUE),
@@ -121,7 +121,7 @@ hist(datW$TAVE[datW$siteN == 4],
      main = paste(levels(datW$NAME)[4]),
      xlab = "Average daily temperature (degrees C)",
      ylab = "Relative frequency",
-     col = "grey50",
+     col = "orchid1",
      border = "white")
 #add a mean line
 abline(v = mean(datW$TAVE[datW$siteN == 4], na.rm = TRUE),
