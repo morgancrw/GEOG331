@@ -27,7 +27,7 @@ datW$TAVE <- datW$TMIN + ((datW$TMAX-datW$TMIN)/2)
 
 #Aggregate - faster than mean
 averageTemp <- aggregate(datW$TAVE, by=list(datW$NAME), FUN="mean", na.rm=TRUE)
-#averageTemp
+averageTemp
 
 #Change the output of column names to more meaningful
 colnames(averageTemp) <- c("NAME", "MAAT")
@@ -38,18 +38,18 @@ datW$siteN <- as.numeric(as.factor(datW$NAME))
 
 
 #print all histograms
-par(mfrow=c(2,2))
+# par(mfrow=c(2,2))
 
 
 #-------------------QUESTION 3-------------------------
 # #histogram for first site
-h1 <- hist(datW$TAVE[datW$siteN == 1],
-     freq = FALSE,
-     main = paste(levels(datW$NAME)[1]),
-     xlab = "Average daily temperature (degrees C)",
-     ylab = "Relative frequency",
-     col = "grey50",
-     border = "white")
+# h1 <- hist(datW$TAVE[datW$siteN == 1],
+#      freq = FALSE,
+#      main = paste(levels(datW$NAME)[1]),
+#      xlab = "Average daily temperature (degrees C)",
+#      ylab = "Relative frequency",
+#      col = "grey50",
+#      border = "white")
 # 
 # #add a mean line
 # abline(v = mean(datW$TAVE[datW$siteN == 1], na.rm = TRUE),
@@ -126,16 +126,16 @@ h1 <- hist(datW$TAVE[datW$siteN == 1],
 #      ylab = "Relative frequency",
 #      col = "orchid1",
 #      border = "white")
-# #add a mean line
+#add a mean line
 # abline(v = mean(datW$TAVE[datW$siteN == 4], na.rm = TRUE),
 #        col = "royalblue4",
 #        lwd = 3)
-# #add a standard deviation line below the mean
+#add a standard deviation line below the mean
 # abline(v = mean(datW$TAVE[datW$siteN == 4], na.rm=TRUE) - sd(datW$TAVE[datW$siteN == 4], na.rm=TRUE),
 #        col = "royalblue4",
 #        lty = 3,
 #        lwd =3)
-# #add a sd line above the mean
+#add a sd line above the mean
 # abline(v = mean(datW$TAVE[datW$siteN == 4], na.rm=TRUE) + sd(datW$TAVE[datW$siteN == 4], na.rm=TRUE),
 #        col = "royalblue4",
 #        lty = 3,
@@ -146,50 +146,84 @@ h1 <- hist(datW$TAVE[datW$siteN == 1],
 #calculating the probability density and adding the normal distribution curve
 
 #normal distribution curve for location 1
-x.plot <- seq(-10, 30, length.out=100)
-y.plot <- dnorm(seq(-10,30, length.out=100), 
-                mean(datW$TAVE[datW$siteN ==1], na.rm = TRUE),
-                sd(datW$TAVE[datW$siteN == 1], na.rm = TRUE))
-y.scaled <- (max(h1$density)/max(y.plot)) * y.plot
-points(x.plot,
-       y.scaled,
-       type = "l",
-       col = "royalblue3",
-       lwd = 4,
-       lty = 2)
+# x.plot <- seq(-10, 30, length.out=100)
+# y.plot <- dnorm(seq(-10,30, length.out=100), 
+#                 mean(datW$TAVE[datW$siteN ==1], na.rm = TRUE),
+#                 sd(datW$TAVE[datW$siteN == 1], na.rm = TRUE))
+# y.scaled <- (max(h1$density)/max(y.plot)) * y.plot
+# points(x.plot,
+#        y.scaled,
+#        type = "l",
+#        col = "royalblue3",
+#        lwd = 4,
+#        lty = 2)
 #---------------------------------------------------
 
 #calculating probability
-pnorm(0,
-      mean(datW$TAVE[datW$siteN == 1], na.rm = TRUE),
-      sd(datW$TAVE[datW$siteN == 1], na.rm=TRUE))
+# pnorm(0,
+#       mean(datW$TAVE[datW$siteN == 1], na.rm = TRUE),
+#       sd(datW$TAVE[datW$siteN == 1], na.rm=TRUE))
 
 #calculating probability of temperature below 5
-pnorm(5,
-      mean(datW$TAVE[datW$siteN == 1], na.rm = TRUE),
-      sd(datW$TAVE[datW$siteN == 1], na.rm=TRUE))
+# pnorm(5,
+#       mean(datW$TAVE[datW$siteN == 1], na.rm = TRUE),
+#       sd(datW$TAVE[datW$siteN == 1], na.rm=TRUE))
 
 #calculating probability of temperatures in the range of 0-5
-pnorm(5,
-      mean(datW$TAVE[datW$siteN == 1], na.rm = TRUE),
-      sd(datW$TAVE[datW$siteN == 1], na.rm=TRUE)) - pnorm(0,
-      mean(datW$TAVE[datW$siteN == 1], na.rm = TRUE),
-      sd(datW$TAVE[datW$siteN == 1], na.rm=TRUE))
+# pnorm(5,
+#       mean(datW$TAVE[datW$siteN == 1], na.rm = TRUE),
+#       sd(datW$TAVE[datW$siteN == 1], na.rm=TRUE)) - pnorm(0,
+#       mean(datW$TAVE[datW$siteN == 1], na.rm = TRUE),
+#       sd(datW$TAVE[datW$siteN == 1], na.rm=TRUE))
 
 #calculating the probability of temperatures above 20
-1 - pnorm(20,
-         mean(datW$TAVE[datW$siteN == 1], na.rm = TRUE),
-         sd(datW$TAVE[datW$siteN == 1], na.rm=TRUE))
+# 1 - pnorm(20,
+#          mean(datW$TAVE[datW$siteN == 1], na.rm = TRUE),
+#          sd(datW$TAVE[datW$siteN == 1], na.rm=TRUE))
 
 #calculating the value of 95%
-qnorm(.95,
-      mean(datW$TAVE[datW$siteN == 1], na.rm = TRUE),
-      sd(datW$TAVE[datW$siteN == 1], na.rm=TRUE))
+# qnorm(.95,
+#       mean(datW$TAVE[datW$siteN == 1], na.rm = TRUE),
+#       sd(datW$TAVE[datW$siteN == 1], na.rm=TRUE))
 
 #------------------QUESTION 6----------------------
-1- pnorm(18.51026,
-      mean(datW$TAVE[datW$siteN == 1], na.rm = TRUE) + 4,
-      sd(datW$TAVE[datW$siteN == 1], na.rm=TRUE))
+# 1- pnorm(18.51026,
+#       mean(datW$TAVE[datW$siteN == 1], na.rm = TRUE) + 4,
+#       sd(datW$TAVE[datW$siteN == 1], na.rm=TRUE))
+#--------------------------------------------------
 
+#-----------------QUESTION 7------------------------
+# hist(datW$PRCP[datW$siteN == 1],
+#       freq = FALSE,
+#       main = paste(levels(datW$NAME)[1]),
+#       xlab = "Daily Precipitation",
+#       ylab = "Relative frequency",
+#       col = "grey50",
+#       border = "white")
+#--------------------------------------------------
 
+#------------------QUESTION 8----------------------
+# sumPrcp <- aggregate(datW$PRCP, by=list(datW$year, datW$siteN), FUN="sum", na.rm=TRUE)
+
+#rename datafram columns
+# colnames(sumPrcp)[1] <- "Year"
+# colnames(sumPrcp)[2] <- "SiteNum"
+# colnames(sumPrcp)[3] <- "AnnualPrecipitation"
+
+#str(sumPrcp)
+# 
+# 
+# hist(sumPrcp$AnnualPrecipitation[sumPrcp$SiteNum == 1],
+#          freq = FALSE,
+#          main = paste(levels(datW$NAME)[1]),
+#          xlab = "Annual Precipitation",
+#          ylab = "Relative frequency",
+#          col = "grey50",
+#          border = "white")
+#-------------------------------------------------
+
+#-------------------QUESTION 9----------------------
+# averagePrcp <- aggregate(datW$PRCP, by=list(datW$NAME), FUN="mean", na.rm=TRUE)
+# averagePrcp
+#----------------------------------------------------
        
