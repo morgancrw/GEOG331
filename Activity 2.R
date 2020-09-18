@@ -187,12 +187,14 @@ datW$siteN <- as.numeric(as.factor(datW$NAME))
 #       sd(datW$TAVE[datW$siteN == 1], na.rm=TRUE))
 
 #------------------QUESTION 6----------------------
+#calculating the probability of a temperature greater than extreme temperatures
 # 1- pnorm(18.51026,
 #       mean(datW$TAVE[datW$siteN == 1], na.rm = TRUE) + 4,
 #       sd(datW$TAVE[datW$siteN == 1], na.rm=TRUE))
 #--------------------------------------------------
 
 #-----------------QUESTION 7------------------------
+#histogram for daily precipitation in location 1
 # hist(datW$PRCP[datW$siteN == 1],
 #       freq = FALSE,
 #       main = paste(levels(datW$NAME)[1]),
@@ -203,6 +205,7 @@ datW$siteN <- as.numeric(as.factor(datW$NAME))
 #--------------------------------------------------
 
 #------------------QUESTION 8----------------------
+#sum find annual precipitation for each site
 # sumPrcp <- aggregate(datW$PRCP, by=list(datW$year, datW$siteN), FUN="sum", na.rm=TRUE)
 
 #rename datafram columns
@@ -212,7 +215,7 @@ datW$siteN <- as.numeric(as.factor(datW$NAME))
 
 #str(sumPrcp)
 # 
-# 
+# histogram for annual precipitation in location 1
 # hist(sumPrcp$AnnualPrecipitation[sumPrcp$SiteNum == 1],
 #          freq = FALSE,
 #          main = paste(levels(datW$NAME)[1]),
@@ -223,6 +226,7 @@ datW$siteN <- as.numeric(as.factor(datW$NAME))
 #-------------------------------------------------
 
 #-------------------QUESTION 9----------------------
+#mean for annual precipitation
 # averagePrcp <- aggregate(datW$PRCP, by=list(datW$NAME), FUN="mean", na.rm=TRUE)
 # averagePrcp
 #----------------------------------------------------
