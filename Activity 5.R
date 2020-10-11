@@ -65,11 +65,26 @@ plot(aveF$doy, aveF$dailyAve,
      ylab=expression(paste("Discharge ft"^"3 ", "sec"^"-1")),
      lwd=2,
      ylim=c(0,90),
-     xaxs="i", yaxs="i") #remove gaps from axes
+     xaxs="i", yaxs="i", #remove gaps from axes
+     axes=FALSE)#no axes 
+
+
 #show standard deviation around the mean
 polygon(c(aveF$doy, rev(aveF$doy)), #x coordinates
         c(aveF$dailyAve-sdF$dailySD, rev(aveF$dailyAve+sdF$dailySD)),# y coordinates
         col=rgb(0.392, 0.584, 0.929, .2), #color that is semi-transparent
         border=NA #no border
         )
+#new axis display with ticks
+axis(1, seq(0,360, by=40), #tick intervals
+     lab=seq(0,360, by=40)) #tick labels
+axis(2, seq(0,80, by=20),
+     seq(0,80, by=20),
+     las = 2)#show ticks at 90 degree angle
+#add legend
+legend("topright", c("mean","1 standard deviation"), #legend items
+       lwd=c(2,NA),#lines
+       col=c("black", rgb(0.392, 0.584, 0.929, .2)), #colors
+       pch=c(NA, 15),#symbols
+       bty="n")#no legend border
 
