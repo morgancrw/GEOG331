@@ -61,13 +61,12 @@ par(mai=c(1,1,1,1))
 #make plot
 plot(aveF$doy, aveF$dailyAve,
      type="l",
-     xlab="Year",
+     xlab="Month",
      ylab=expression(paste("Discharge ft"^"3 ", "sec"^"-1")),
      lwd=2,
-     ylim=c(0,90),
+     ylim=c(0,180),
      xaxs="i", yaxs="i", #remove gaps from axes
      axes=FALSE)#no axes 
-
 
 #show standard deviation around the mean
 polygon(c(aveF$doy, rev(aveF$doy)), #x coordinates
@@ -75,16 +74,38 @@ polygon(c(aveF$doy, rev(aveF$doy)), #x coordinates
         col=rgb(0.392, 0.584, 0.929, .2), #color that is semi-transparent
         border=NA #no border
         )
-#new axis display with ticks
-axis(1, seq(0,360, by=40), #tick intervals
-     lab=seq(0,360, by=40)) #tick labels
-axis(2, seq(0,80, by=20),
-     seq(0,80, by=20),
+
+
+#--------------QUESTION 5------------------
+#creat dataframe with only data from 2017
+obsYear <- data.frame(datD$discharge[datD$year==2017])
+obsYear$doy <- datD$doy[datD$year==2017]
+colnames(obsYear) <- c("discharge", "doy")
+
+#new axis display with ticks for each month
+axis(1, seq(0,360, by=30), #tick intervals
+     lab=seq(0,12, by=1)) #tick labels
+axis(2, seq(0,180, by=20),
+     seq(0,180, by=20),
      las = 2)#show ticks at 90 degree angle
-#add legend
-legend("topright", c("mean","1 standard deviation"), #legend items
+
+#add legend with new line info
+legend("topleft", c("mean","1 standard deviation", "2017 discharge"), #legend items
        lwd=c(2,NA),#lines
-       col=c("black", rgb(0.392, 0.584, 0.929, .2)), #colors
-       pch=c(NA, 15),#symbols
+       col=c("black", rgb(0.392, 0.584, 0.929, .2), "grey71"), #colors
+       pch=c(NA, 15, NA),#symbols
        bty="n")#no legend border
+
+#adding line for 2017 observations
+lines(obsYear$doy, obsYear$discharge, lwd=2, col=c("grey71"))
+
+
+#---------------------------------------------------------
+
+
+#-----------------------QUESTION 7------------------------
+
+
+
+
 
