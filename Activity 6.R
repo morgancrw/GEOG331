@@ -52,3 +52,16 @@ plotRGB(rgbL, stretch="lin", axes=TRUE)
 plot(g1966, col="tan3", border=NA, add=TRUE)
 plot(NDVIraster[[1]])
 #---------------------------------------------------------------
+
+#reproject the glaciers
+#use the NDVI projection
+g1966p <- spTransform(g1966,NDVIraster[[1]]@crs)
+g1998p <- spTransform(g1998,NDVIraster[[1]]@crs)
+g2005p <- spTransform(g2005,NDVIraster[[1]]@crs)
+g2015p <- spTransform(g2015,NDVIraster[[1]]@crs)
+
+#------------------------QUESTION 4---------------------
+#map maximum NDVI and glaciers in 2015
+plot(NDVIraster[[13]], axes=FALSE)
+plot(g2015p, border="black", add=TRUE)
+#-------------------------------------------------------
