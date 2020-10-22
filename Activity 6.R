@@ -41,16 +41,16 @@ for(i in 1:length(ndviYear)){
 }
 
 #---------------------------QUESTION 3---------------------------
-#plot both side by side
-par(mfrow=c(1,2))
-#plot with color
-#show axes for reference
-#add contrast to the imagery to see it better
-par(mai=c(1,1,1,1))
-plotRGB(rgbL, stretch="lin", axes=TRUE)
-#add polygons to plot
-plot(g1966, col="tan3", border=NA, add=TRUE)
-plot(NDVIraster[[1]])
+# #plot both side by side
+# par(mfrow=c(1,2))
+# #plot with color
+# #show axes for reference
+# #add contrast to the imagery to see it better
+# par(mai=c(1,1,1,1))
+# plotRGB(rgbL, stretch="lin", axes=TRUE)
+# #add polygons to plot
+# plot(g1966, col="tan3", border=NA, add=TRUE)
+# plot(NDVIraster[[1]])
 #---------------------------------------------------------------
 
 #reproject the glaciers
@@ -61,7 +61,30 @@ g2005p <- spTransform(g2005,NDVIraster[[1]]@crs)
 g2015p <- spTransform(g2015,NDVIraster[[1]]@crs)
 
 #------------------------QUESTION 4---------------------
-#map maximum NDVI and glaciers in 2015
-plot(NDVIraster[[13]], axes=FALSE)
-plot(g2015p, border="black", add=TRUE)
+# #map maximum NDVI and glaciers in 2015
+# plot(NDVIraster[[13]], axes=FALSE)
+# plot(g2015p, border="black", add=TRUE)
 #-------------------------------------------------------
+
+#calculate area for all polygons
+#add directly into data table for each shapefile
+g1966p@data$a1966m.sq <- area(g1966p)
+g1998p@data$a1998m.sq <- area(g1998p)
+g2005p@data$a2005m.sq <- area(g2005p)
+g2015p@data$a2015m.sq <- area(g2015p)
+
+#join glacier data into new table
+gAllp1 <- join(g1966p@data,g1998p@data, by="GLACNAME", type="full")
+gAllp2 <- join(gAllp1,g2005p@data, by="GLACNAME", type="full")
+gAll <- join(gAllp2,g2015p@data, by="GLACNAME", type="full")
+
+
+#---------------------QUESTION 5---------------------
+
+# %change = (difference / original) * 100
+
+head(gAll)
+
+
+#----------------------------------------------------
+
