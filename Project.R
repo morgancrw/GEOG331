@@ -22,7 +22,7 @@ datFC$monthF <- month(datFC$dateF)
 datD$monthD <- month(datD$dateD)
 
 
-#add drought data to fire data based on county
+#add drought data to fire data based on county and date
 datCounty <- inner_join(datFC, datD, by=c("COUNTY"="Name", "yearF"="yearD", "monthF"="monthD"))
 
 head(datCounty)
