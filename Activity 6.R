@@ -81,10 +81,33 @@ gAll <- join(gAllp2,g2015p@data, by="GLACNAME", type="full")
 
 #---------------------QUESTION 5---------------------
 
-# %change = (difference / original) * 100
+#new data frame for % area change
+gChange <- data.frame("Name"=gAll$GLACNAME)
+gChange$a1966m.sq <- gAll$a1966m.sq
+gChange$a2015m.sq <- gAll$a2015m.sq
 
-head(gAll)
+#function to calculate % area change
+pct <- function(original, new) {
+  diff <- new - original 
+  change <- diff / original
+  result <- change * 100
+}
 
+gChange$areaC <- pct(gChange$a1966m.sq, gChange$a2015m.sq)
+
+#format %change to 2 decimal places
+gChange$areaC <- sprintf(gChange$areaC, fmt = '%#.2f')
+
+#g2015$change <- gChange$areaC
+#head(g2015@data)
+#spplot(g2015, "change")
+#CREATE SPPLOT
 
 #----------------------------------------------------
 
+#find where 1966 and 2015 don't overlap
+diffPoly <- gDifference(g1966p, g2015p, checkValidity = 2L)
+
+#plot with NDVI
+plot(NDVIraster[[13]], axes=FALSE, box=FALSE)
+plot(diffPoly,col="black", border=NA,add=TRUE)
