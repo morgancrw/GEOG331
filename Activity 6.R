@@ -97,6 +97,7 @@ gChange$areaC <- pct(gChange$a1966m.sq, gChange$a2015m.sq)
 
 #format %change to 2 decimal places
 gChange$areaC <- sprintf(gChange$areaC, fmt = '%#.2f')
+gChange$areaC <- as.numeric(gChange$areaC)
 
 #g2015$change <- gChange$areaC
 #head(g2015@data)
@@ -105,9 +106,40 @@ gChange$areaC <- sprintf(gChange$areaC, fmt = '%#.2f')
 
 #----------------------------------------------------
 
-#find where 1966 and 2015 don't overlap
-diffPoly <- gDifference(g1966p, g2015p, checkValidity = 2L)
+#-------------------QUESTION 6--------------------------
 
-#plot with NDVI
-plot(NDVIraster[[13]], axes=FALSE, box=FALSE)
-plot(diffPoly,col="black", border=NA,add=TRUE)
+#find glacier with largest % loss
+gChange$Name[gChange$areaC == min(gChange$areaC)]
+
+#-------------------------------------------------------
+#------------------QUESTION 7------------------------
+# #designate that NDVIraster list is a stack
+# NDVIstack <- stack(NDVIraster)
+# 
+# #set up lm function to apply to every cell
+# timeT <- ndviYear
+# fun <- function(x) {
+#   if(is.na(x[1])){
+#     NA}else{
+#       #fit a regression and extract a slope
+#       lm(x ~ timeT)$coefficients[2] }}
+# 
+# #apply the slope function to the rasters
+# NDVIfit <- calc(NDVIstack,fun)
+# 
+# #plot the change in NDVI
+# plot(NDVIfit, axes=FALSE)
+#------------------------------------------------------
+#-----------------------QUESTION 8-------------------------
+#buffer glaciers
+glacier500m <- gBuffer(g1966p,
+                       byid=TRUE,
+                       width=500)
+#convert to a raster
+buffRaster <- rasterize(glacier500m,
+                        NDVIraster[[1]], 
+                        field=glacier500m@data$GLACNAME, 
+                        background=0)
+plot(buffRaster)
+
+#-----------------------------------------------------------
